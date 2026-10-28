@@ -47,7 +47,8 @@ h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-.01em;text-wrap:balan
 .accts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .acct{border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;gap:4px;min-width:0}
 .acct b{font:500 13px var(--mono)}
-.acct span{font-size:13.5px}
+.acct span{font-size:13.5px;color:var(--muted)}
+.acct span.res{color:var(--ok);font-weight:800;font-size:15px}
 .hl{color:var(--seg);font-weight:800;background:var(--card);padding:0 4px;border-radius:4px}
 .o small.why{color:var(--ink);font-weight:600;margin-top:4px}
 .tag{justify-self:start;font-style:normal;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:999px}
@@ -94,9 +95,9 @@ h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-.01em;text-wrap:balan
   <section class="real">
     <h2>One real account for each path</h2>
     <div class="accts">
-      <div class="acct"><i class="tag t-seg">Full enrichment + regional headcount</i><b>Masco Corporation</b><span>US, 18,000 employees: above the SMB line, so its employees are split across regions.</span></div>
-      <div class="acct"><i class="tag t-reg">European registry check</i><b>Assmann Group</b><span>German HQ, no parent in Clay's data: the registry led to its parent, ASSMANN Holding GmbH.</span></div>
-      <div class="acct"><i class="tag t-glob">Global sources, outside the US and Europe</i><b>Sony</b><span>Tokyo HQ: 94,900 employees from Sony's own data (LinkedIn shows 25,094), $84.0B revenue from its 20-F, and 45,140 employees in APAC.</span></div>
+      <div class="acct"><i class="tag t-seg">Full enrichment + regional headcount</i><b>Masco Corporation</b><span class="res">✓ 18,000 employees</span><span>Matches your team's hand-check</span></div>
+      <div class="acct"><i class="tag t-reg">European registry check</i><b>Assmann Group</b><span class="res">✓ Parent: ASSMANN Holding GmbH</span><span>Matches your team's hand-check</span></div>
+      <div class="acct"><i class="tag t-glob">Global sources, outside the US and Europe</i><b>Sony</b><span class="res">✓ 94,900 employees · $84.0B revenue</span><span>Both from Sony's own reports</span></div>
     </div>
   </section>
 </div>
