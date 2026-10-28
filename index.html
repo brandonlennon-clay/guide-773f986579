@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"></head><body style="margin:0">
+<title>Waterfall by Region and Segment</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: the concern, then a two-question decision tree (segment, then region), three reassurances, and real accounts. */
+:root{
+  --bg:#f4f6f8; --card:#ffffff; --ink:#141b24; --muted:#5d6877; --line:#d9dfe6;
+  --seg:#6b5bd2; --seg-soft:#eeebfb; --reg:#0f7a6c; --reg-soft:#e2f3f0;
+  --warn:#a85b00; --warn-soft:#fbefdc; --ok:#1d7a46; --ok-soft:#e5f3ea;
+  --display:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f141a; --card:#171e27; --ink:#e8edf3; --muted:#9aa5b3; --line:#2a3440;
+  --seg:#a99cf5; --seg-soft:#25213f; --reg:#5fd0bd; --reg-soft:#15302c;
+  --warn:#f2b45c; --warn-soft:#33260f; --ok:#6fcf97; --ok-soft:#163023; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141a; --card:#171e27; --ink:#e8edf3; --muted:#9aa5b3; --line:#2a3440;
+  --seg:#a99cf5; --seg-soft:#25213f; --reg:#5fd0bd; --reg-soft:#15302c;
+  --warn:#f2b45c; --warn-soft:#33260f; --ok:#6fcf97; --ok-soft:#163023; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--display)}
+.wrap{max-width:940px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
+h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.worry{background:var(--warn-soft);border-radius:12px;padding:14px 18px;display:grid;gap:4px}
+.lab{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--warn)}
+.worry p{margin:0;font-size:17px;font-weight:600}
+.start{justify-self:center;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:8px 18px;font-weight:800}
+.arrow{text-align:center;color:var(--muted);font-size:14px;line-height:1}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:10px}
+.q h2{margin:0;font-size:16px;font-weight:800;display:flex;gap:8px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.seg .dot{background:var(--seg)} .reg .dot{background:var(--reg)}
+.out{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.o{border-radius:10px;padding:10px 12px;font-weight:600;font-size:14.5px;display:grid;gap:2px}
+.o small{font-weight:500;color:var(--muted);font-size:13px}
+.o b{font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.seg .o{background:var(--seg-soft)} .seg .o b{color:var(--seg)}
+.reg .o{background:var(--reg-soft)} .reg .o b{color:var(--reg)}
+.o.plan{background:var(--warn-soft)} .o.plan b{color:var(--warn)}
+.same{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:10px 14px;font-size:14px;color:var(--muted)}
+.same strong{color:var(--ink)}
+.calm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.calm div{background:var(--ok-soft);color:var(--ok);border-radius:10px;padding:12px;font-weight:700;font-size:14.5px}
+.real{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px}
+.real h2{margin:0;font-size:17px;font-weight:800}
+.accts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.acct{border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;gap:4px;min-width:0}
+.acct b{font:500 13px var(--mono)}
+.acct span{font-size:13.5px}
+.fix{margin:0;font-size:14px}
+.fix strong{color:var(--warn)}
+@media (max-width:700px){.out,.calm,.accts{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <h1>The enrichment waterfall by segment and region</h1>
+
+  <div class="worry">
+    <span class="lab">The question</span>
+    <p>“Where does our waterfall differ for EMEA vs. NA/AMER, or by segment?”</p>
+  </div>
+
+  <div class="start">Every account enters one workflow</div>
+  <div class="arrow">↓</div>
+
+  <section class="q seg">
+    <h2><span class="dot"></span>1. Is the account above the SMB line (300+ employees)?</h2>
+    <div class="out">
+      <div class="o"><b>Yes</b>Full enrichment<small>Core fields, regional headcount, deeper research</small></div>
+      <div class="o plan"><b>No · being finalized</b>Lighter SMB path<small>Core fields only, about 1.1 credits</small></div>
+    </div>
+  </section>
+  <div class="arrow">↓</div>
+
+  <section class="q reg">
+    <h2><span class="dot"></span>2. Is the HQ in Europe, with no parent in Clay's data?</h2>
+    <div class="out">
+      <div class="o"><b>Yes</b>Adds a European registry check<small>Used as leads for parent research</small></div>
+      <div class="o"><b>No</b>Standard hierarchy research<small>Same steps everywhere else</small></div>
+    </div>
+  </section>
+
+  <div class="same"><strong>Everything else is the same in every region:</strong> the agreed source order, the identity check and regional headcount across 9 regions.</div>
+
+  <div class="calm">
+    <div>One workflow to maintain</div>
+    <div>European HQs get an extra check</div>
+    <div>Regional headcount covers 9 regions</div>
+  </div>
+
+  <section class="real">
+    <h2>Real accounts</h2>
+    <div class="accts">
+      <div class="acct"><b>Assmann Group</b><span>Germany. Registry records used as leads; parent ASSMANN Holding GmbH.</span></div>
+      <div class="acct"><b>Masco Corporation</b><span>US, 18,000 employees. Full enrichment, standard research.</span></div>
+      <div class="acct"><b>Big Star Ford</b><span>US, 51 employees. SMB: moves to the lighter path.</span></div>
+    </div>
+    <p class="fix"><strong>Next: the SMB lighter path ships and is tested on 10 SMB accounts before any SMB segment runs.</strong></p>
+  </section>
+</div>
+
+</body></html>
